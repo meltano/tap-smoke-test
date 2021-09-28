@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "tap-smoke-test"
+version = "0.0.1"
+description = "`tap-smoke-test` is a Singer tap for SmokeTest, built with the Meltano SDK for Singer Taps."
+authors = ["Florian Hines"]
+license = "Apache 2.0"
+
+[tool.poetry.dependencies]
+python = "<3.9,>=3.6.1"
+requests = "^2.25.1"
+singer-sdk = "^0.3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+# CLI declaration
+tap-smoke-test = 'tap_smoke_test.tap:TapSmokeTest.cli'

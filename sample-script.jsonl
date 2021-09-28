@@ -1,0 +1,7 @@
+{"type": "SCHEMA", "stream": "users", "key_properties": ["id"], "schema": {"required": ["id"], "type": "object", "properties": {"id": {"type": "integer"}}}}
+{"type": "RECORD", "stream": "users", "record": {"id": 1, "name": "Chris"}}
+{"type": "RECORD", "stream": "users", "record": {"id": 2, "name": "Mike"}}
+{"type": "STDOUT", "payload": "some stdout output"}
+{"type": "STDERR", "payload": "some err output"}
+{"type": "STDERR", "payload_file": "path/to/some_exception.txt"}
+{"type": "EXIT", "code": 1}
