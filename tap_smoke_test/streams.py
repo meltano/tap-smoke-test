@@ -1,60 +1,48 @@
 """Stream type classes for tap-smoke-test."""
-
-from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
-from singer_sdk import typing as th  # JSON Schema typing helpers
+import json
+import logging
 
 from tap_smoke_test.client import SmokeTestStream
-
-# TODO: Delete this is if not using json files for schema definition
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-# TODO: - Override `UsersStream` and `GroupsStream` with your own stream definition.
-#       - Copy-paste as many times as needed to create multiple stream types.
+from genson import SchemaBuilder
 
 
-class UsersStream(SmokeTestStream):
-    """Define custom stream."""
-    name = "users"
-    primary_keys = ["id"]
-    replication_key = None
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property(
-            "id",
-            th.StringType,
-            description="The user's system ID"
-        ),
-        th.Property(
-            "age",
-            th.IntegerType,
-            description="The user's age in years"
-        ),
-        th.Property(
-            "email",
-            th.StringType,
-            description="The user's email address"
-        ),
-        th.Property("street", th.StringType),
-        th.Property("city", th.StringType),
-        th.Property(
-            "state",
-            th.StringType,
-            description="State name in ISO 3166-2 format"
-        ),
-        th.Property("zip", th.StringType),
-    ).to_dict()
+class FromJSONLStream(SmokeTestStream):
+    """Stream class that can infer a schema dynamically from a JSONL file containing only an array of records."""
 
+    _inferred_schema = None
 
-class GroupsStream(SmokeTestStream):
-    """Define custom stream."""
-    name = "groups"
-    primary_keys = ["id"]
-    replication_key = "modified"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property("id", th.StringType),
-        th.Property("modified", th.DateTimeType),
-    ).to_dict()
+    @property
+    def stream_config(self) -> dict:
+        """Return the config for this particular stream name instance."""
+        for conf in self.config["streams"]:
+            if conf["stream_name"] == self.name:
+                return conf
+
+    @property
+    def schema(self) -> dict:
+        """Dynamically infer the json schema from the source data. This is only performed once - and reused
+        there after to cut down on IO.
+        """
+
+        if self._inferred_schema:
+            logging.debug("%s stream retrieved inferred schema from cache" % self.name)
+            return self._inferred_schema
+
+        logging.debug("%s stream running schema inference" % self.name)
+        if self.stream_config.get("schema_gen_exception", False):
+            logging.warning("raising smoke test schema exception")
+            raise Exception("Smoke test schema call failing with exception")
+
+        builder = SchemaBuilder()
+        with open(self.stream_config["input_filename"], mode="r") as f:
+            for count, entry in enumerate(f):
+                if count > self.config["schema_inference_record_count"]:
+                    logging.info(
+                        "%s stream max schema_inference_record_count hit" % self.name
+                    )
+                    break
+                record = json.loads(entry)
+                builder.add_object(record)
+
+        self._inferred_schema = builder.to_schema()
+        return self._inferred_schema
