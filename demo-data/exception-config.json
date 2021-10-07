@@ -3,7 +3,8 @@
     {
       "stream_name":  "pageviews",
       "input_filename": "demo-data/pageviews-data.jsonl",
-      "client_exception": true
+      "client_exception": false,
+      "schema_gen_exception": true
     }
   ]
 }

@@ -25,6 +25,6 @@ class SmokeTestStream(Stream):
                 for entry in f:
                     yield json.loads(entry)
 
-        if self.config.get("client_exception", False):
+        if self.stream_config.get("client_exception", False):
             logging.warning("raising smoke test client exception")
             raise Exception("Smoke test client failing with exception")
