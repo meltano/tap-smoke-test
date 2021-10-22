@@ -1,0 +1,8 @@
+{
+  "streams": [
+    {
+      "stream_name":  "animals",
+      "input_filename": "https://gitlab.com/meltano/tap-smoke-test/-/raw/main/demo-data/animals-data.jsonl"
+    }
+  ]
+}
