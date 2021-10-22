@@ -22,19 +22,20 @@ tap-smoke-test --about
 ```
 
 The minimal config requires declaring an array of streams, each stream must define a `stream_name`, and `input_filename` 
-the path to an jsonl formatted file of mock data you would like to use. Note that schemas are inferred on the
-fly - so no schema definitions need to be provided.
+the path to an jsonl formatted file of mock data you would like to use. `input_filename` can be either the path to a local
+file, or the URL of a HTTP(s) accessible file. Note that schemas are inferred on the fly - so no schema definitions need
+to be provided.
 
 ```
 {
   "streams": [
     {
       "stream_name":  "animals",
-      "input_filename": "demo-data/animals-data.json"
+      "input_filename": "https://gitlab.com/meltano/tap-smoke-test/-/raw/main/demo-data/animals-data.jsonl"
     },
     {
       "stream_name":  "pageviews",
-      "input_filename": "demo-data/pageviews-data.json"
+      "input_filename": "demo-data/pageviews-data.jsonl"
     }
   ]
 }
@@ -111,8 +112,8 @@ You can easily run `tap-smoke-test` by itself or in a pipeline using [Meltano](h
 
 This tap currently ships with 2 example data sets:
 
-- pageviews-data.json - containing mock pageview like records
-- animals-data.json - containing a mock animal index with nulls
+- pageviews-data.jsonl - containing mock pageview like records
+- animals-data.jsonl - containing a mock animal index with nulls
 
 ### Random record generation
 

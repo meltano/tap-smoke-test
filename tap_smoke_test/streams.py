@@ -34,15 +34,14 @@ class FromJSONLStream(SmokeTestStream):
             raise Exception("Smoke test schema call failing with exception")
 
         builder = SchemaBuilder()
-        with open(self.stream_config["input_filename"], mode="r") as f:
-            for count, entry in enumerate(f):
-                if count > self.config["schema_inference_record_count"]:
-                    logging.info(
-                        "%s stream max schema_inference_record_count hit" % self.name
-                    )
-                    break
-                record = json.loads(entry)
-                builder.add_object(record)
+        for count, entry in enumerate(self.reader.read()):
+            if count > self.config["schema_inference_record_count"]:
+                logging.info(
+                    "%s stream max schema_inference_record_count hit" % self.name
+                )
+                break
+            record = json.loads(entry)
+            builder.add_object(record)
 
         self._inferred_schema = builder.to_schema()
         return self._inferred_schema
