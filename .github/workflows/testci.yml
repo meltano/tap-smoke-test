@@ -1,0 +1,48 @@
+name: Test tap-smoke-test
+
+on: [push]
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python '${{ matrix.python-version }}'
+      uses: actions/setup-python@v2
+      with:
+        python-version: '${{ matrix.python-version }}'
+
+    - name: Install Poetry
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==1.1.*
+    - name: Install dependencies
+      run: |
+        poetry install
+    - name: Run pre-commit
+      run: |
+        poetry run tox lint
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python '${{ matrix.python-version }}'
+      uses: actions/setup-python@v2
+      with:
+        python-version: '${{ matrix.python-version }}'
+    - name: Install Poetry
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry==1.1.*
+    - name: Install dependencies
+      run: |
+        poetry install
+    - name: Test with pytest
+      run: |
+        poetry run pytest --capture=no

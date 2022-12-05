@@ -4,7 +4,7 @@ from unittest import mock
 
 import pytest
 from os import path
-from singer_sdk.testing import get_standard_tap_tests, Tap
+from singer_sdk.testing import get_standard_tap_tests
 
 from tap_smoke_test.tap import TapSmokeTest
 
@@ -48,7 +48,7 @@ def test_schema_gen_exception():
     with pytest.raises(
         Exception, match="Smoke test schema call failing with exception"
     ):
-        tap = TapSmokeTest(config=config, parse_env_config=False)
+        TapSmokeTest(config=config, parse_env_config=False)
 
 
 def test_client_exception():
@@ -81,8 +81,8 @@ class TestRemote:
         mock_resp.content = content
 
         def _mock_iter_lines():
-            for l in content.splitlines():
-                yield l
+            for line in content.splitlines():
+                yield line
 
         mock_resp.iter_lines = _mock_iter_lines
         return mock_resp
@@ -99,7 +99,8 @@ class TestRemote:
         }
 
         mock_resp = self._mock_response(
-            content='{"id":1,"description":"Red-headed woodpecker","verified":true,"views":27,"created_at":"2021-09-22T01:01:05Z"}'
+            content='{"id":1,"description":"Red-headed woodpecker","verified":true,'
+            '"views":27,"created_at":"2021-09-22T01:01:05Z"}'
         )
         mock_get.return_value = mock_resp
 
