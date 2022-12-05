@@ -1,3 +1,4 @@
+"""core code for handling input readers."""
 import logging
 from typing import Generator
 
@@ -43,5 +44,6 @@ class HTTPReader(InputReader):
                 yield entry
         else:
             raise Exception(
-                f"Fetch of remote payload failed. status: [{r.status_code}], reason: [{r.reason}]"
+                f"Fetch of remote payload failed. status: [{r.status_code}], "
+                f"reason: [{r.reason}]"
             )

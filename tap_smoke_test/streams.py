@@ -7,7 +7,9 @@ from genson import SchemaBuilder
 
 
 class FromJSONLStream(SmokeTestStream):
-    """Stream class that can infer a schema dynamically from a JSONL file containing only an array of records."""
+    """Stream class that can infer a schema dynamically.
+    from a JSONL file containing only an array of records.
+    """
 
     _inferred_schema = None
 
@@ -20,10 +22,9 @@ class FromJSONLStream(SmokeTestStream):
 
     @property
     def schema(self) -> dict:
-        """Dynamically infer the json schema from the source data. This is only performed once - and reused
-        there after to cut down on IO.
+        """Dynamically infer the json schema from the source data.
+        This is only performed once - and reused there after to cut down on IO.
         """
-
         if self._inferred_schema:
             logging.debug("%s stream retrieved inferred schema from cache" % self.name)
             return self._inferred_schema

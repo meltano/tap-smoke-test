@@ -2,13 +2,12 @@
 import json
 import logging
 
-from typing import Optional, Iterable, Generator
+from typing import Optional, Iterable
 from urllib.parse import urlparse
 
-import requests
 from singer_sdk.streams import Stream
 
-from tap_smoke_test.reader import LocalReader, HTTPReader
+from tap_smoke_test.reader import LocalReader, HTTPReader, InputReader
 
 
 class SmokeTestStream(Stream):
@@ -16,7 +15,7 @@ class SmokeTestStream(Stream):
 
     @property
     def reader(self) -> "InputReader":
-        """Obtain an InputReader (either local or remote) based on input_filename's url scheme"""
+        """Obtain an InputReader (either local or remote) on input_filename's url scheme."""
         path = urlparse(self.stream_config["input_filename"])
         if path.scheme in ["file", ""]:
             return LocalReader(self.stream_config["input_filename"])
@@ -32,7 +31,6 @@ class SmokeTestStream(Stream):
         stream if partitioning is required for the stream. Most implementations do not
         require partitioning and should ignore the `context` argument.
         """
-
         i = 0
         while i < self.stream_config["loop_count"]:
             i += 1
