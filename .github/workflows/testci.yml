@@ -24,7 +24,7 @@ jobs:
         poetry install
     - name: Run pre-commit
       run: |
-        poetry run tox lint
+        poetry run tox --skip-missing-interpreters=true lint
 
   pytest:
     runs-on: ubuntu-latest
