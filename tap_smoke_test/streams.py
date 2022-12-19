@@ -1,29 +1,31 @@
 """Stream type classes for tap-smoke-test."""
+
+from __future__ import annotations
+
 import json
 import logging
 
-from tap_smoke_test.client import SmokeTestStream
 from genson import SchemaBuilder
+
+from tap_smoke_test.client import SmokeTestStream
 
 
 class FromJSONLStream(SmokeTestStream):
-    """Stream class that can infer a schema dynamically.
-    from a JSONL file containing only an array of records.
-    """
+    """Stream class that can infer a schema dynamically from a JSONL file of records."""
 
     _inferred_schema = None
 
     @property
-    def stream_config(self) -> dict:
-        """Return the config for this particular stream name instance."""
-        for conf in self.config["streams"]:
-            if conf["stream_name"] == self.name:
-                return conf
-
-    @property
     def schema(self) -> dict:
         """Dynamically infer the json schema from the source data.
+
         This is only performed once - and reused there after to cut down on IO.
+
+        Returns:
+            The schema for this stream.
+
+        Raises:
+            Exception: If the schema_gen_exception config is set to True.
         """
         if self._inferred_schema:
             logging.debug("%s stream retrieved inferred schema from cache" % self.name)

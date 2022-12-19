@@ -2,10 +2,9 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-# TODO: Import your custom stream types here:
 from tap_smoke_test.streams import FromJSONLStream
 
 
@@ -43,7 +42,10 @@ class TapSmokeTest(Tap):
                         th.BooleanType,
                         required=False,
                         default=False,
-                        description="Whether we should simulate failing by having the client raise an exception.",
+                        description=(
+                            "Whether we should simulate failing by having the client "
+                            "raise an exception."
+                        ),
                     ),
                     th.Property(
                         "schema_gen_exception",
@@ -58,7 +60,9 @@ class TapSmokeTest(Tap):
                         th.IntegerType,
                         required=False,
                         default=1,
-                        description="The number of times we should playback the input file.",
+                        description=(
+                            "The number of times we should playback the input file."
+                        ),
                     ),
                 )
             ),
@@ -67,7 +71,11 @@ class TapSmokeTest(Tap):
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
-        """Return a list of discovered streams."""
+        """Return a list of discovered streams.
+
+        Returns:
+            A list of Stream instances.
+        """
         streams = []
         for s in self.config["streams"]:
             stream = FromJSONLStream(tap=self, name=s["stream_name"])

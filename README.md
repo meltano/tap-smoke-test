@@ -21,7 +21,7 @@ tap is available by running:
 tap-smoke-test --about
 ```
 
-The minimal config requires declaring an array of streams, each stream must define a `stream_name`, and `input_filename` 
+The minimal config requires declaring an array of streams, each stream must define a `stream_name`, and `input_filename`
 the path to an jsonl formatted file of mock data you would like to use. `input_filename` can be either the path to a local
 file, or the URL of a HTTP(s) accessible file. Note that schemas are inferred on the fly - so no schema definitions need
 to be provided.
@@ -64,8 +64,8 @@ In the example above, the animals-data.json records will be read and emitted as 
 
 ### Schema inference
 
-This tap uses [genson](https://pypi.org/project/genson/) to attempt to dynamically infer the schema of the JSON input 
-files provided. To allow for detection of things like nullable fields, multiple records are inspected. 
+This tap uses [genson](https://pypi.org/project/genson/) to attempt to dynamically infer the schema of the JSON input
+files provided. To allow for detection of things like nullable fields, multiple records are inspected.
 How many are inspected is controlled via the config option `"schema_inference_record_count"`:
 
 ```
@@ -102,7 +102,7 @@ are triggered during invocation.
 }
 ```
 
-Note: creative use of the schema_inference_record_count setting, also allows for simulating unexpected schema change's in records. 
+Note: creative use of the schema_inference_record_count setting, also allows for simulating unexpected schema change's in records.
 
 ## Usage
 
@@ -117,7 +117,7 @@ This tap currently ships with 2 example data sets:
 
 ### Random record generation
 
-In the future we'll likely support optional generation of random records, on the fly, at invocation time, using a library like [https://github.com/joke2k/faker](https://github.com/joke2k/faker). 
+In the future we'll likely support optional generation of random records, on the fly, at invocation time, using a library like [https://github.com/joke2k/faker](https://github.com/joke2k/faker).
 
 ### Executing the Tap Directly
 
@@ -183,5 +183,5 @@ meltano elt tap-smoke-test target-jsonl
 
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to 
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
 develop your own taps and targets.
