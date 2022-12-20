@@ -8,7 +8,10 @@ from singer_sdk.testing import get_standard_tap_tests
 
 from tap_smoke_test.tap import TapSmokeTest
 
-FIXTURE_DIR = "./demo-data"
+FIXTURE_DIR = path.join(
+    path.dirname(path.realpath(__file__)),
+    "../demo-data",
+)
 
 BASIC_CONFIG = {
     "streams": [
