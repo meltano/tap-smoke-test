@@ -1,16 +1,16 @@
 """Tests standard tap features using the built-in SDK tests library."""
 import re
+from os import path
 from unittest import mock
 
 import pytest
-from os import path
 from singer_sdk.testing import get_standard_tap_tests
 
 from tap_smoke_test.tap import TapSmokeTest
 
 FIXTURE_DIR = path.join(
     path.dirname(path.realpath(__file__)),
-    "../../demo-data",
+    "../demo-data",
 )
 
 BASIC_CONFIG = {
@@ -81,8 +81,7 @@ class TestRemote:
         mock_resp.content = content
 
         def _mock_iter_lines():
-            for line in content.splitlines():
-                yield line
+            yield from content.splitlines()
 
         mock_resp.iter_lines = _mock_iter_lines
         return mock_resp
