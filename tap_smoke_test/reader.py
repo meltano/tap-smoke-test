@@ -35,7 +35,7 @@ class InputReader:
         """
         self.input_filename = input_filename
 
-    def read(self) -> Generator[str, None, None]:
+    def read(self) -> Generator[str, None, None]:  # type: ignore
         """Read the input file and yield each line."""
         ...
 
