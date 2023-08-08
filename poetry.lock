@@ -814,13 +814,13 @@ files = [
 
 [[package]]
 name = "singer-sdk"
-version = "0.30.0"
+version = "0.31.0"
 description = "A framework for building Singer taps"
 optional = false
 python-versions = ">=3.7.1,<3.12"
 files = [
-    {file = "singer_sdk-0.30.0-py3-none-any.whl", hash = "sha256:ca8e002ab6fce56c4e6f3312655c7b68896d1d07f88a9efeb373e74c58ceb9b8"},
-    {file = "singer_sdk-0.30.0.tar.gz", hash = "sha256:73300d1c1bcb048b49a7f28c71ae26c9d309fdf3375e65940747b05c8a6551b5"},
+    {file = "singer_sdk-0.31.0-py3-none-any.whl", hash = "sha256:aa9329bd7e26f9e2bd59332468e064dd38f6df2dd6b7445e047d8008acd0dd65"},
+    {file = "singer_sdk-0.31.0.tar.gz", hash = "sha256:de8fdf00967dc13b4073dddad499799df2a1273806406b765ba55b671ea18b8a"},
 ]
 
 [package.dependencies]
@@ -842,7 +842,7 @@ pytz = ">=2022.2.1,<2024.0.0"
 PyYAML = ">=6.0,<7.0"
 requests = ">=2.25.1,<3.0.0"
 simplejson = ">=3.17.6,<4.0.0"
-sqlalchemy = ">=1.4,<2.0"
+sqlalchemy = ">=1.4,<3.0"
 typing-extensions = ">=4.2.0,<5.0.0"
 urllib3 = ">=1.26,<2"
 
@@ -992,4 +992,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<3.12"
-content-hash = "472002521c56eff2b7ee7a3f7d06fba72878887fc21511b19a255350d3478df7"
+content-hash = "47dfe859b703ca23efe2605f14fb051648fd34773b39e6425d669d5c5d979284"
