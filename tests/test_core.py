@@ -4,7 +4,7 @@ from os import path
 from unittest import mock
 
 import pytest
-from singer_sdk.testing import get_standard_tap_tests
+from singer_sdk.testing import get_tap_test_class
 
 from tap_smoke_test.tap import TapSmokeTest
 
@@ -23,15 +23,7 @@ BASIC_CONFIG = {
 }
 
 
-# Run standard built-in tap tests from the SDK:
-def test_standard_tap_tests():
-    """Run standard tap tests from the SDK."""
-    tests = get_standard_tap_tests(TapSmokeTest, config=BASIC_CONFIG)
-    for test in tests:
-        test()
-
-
-# TODO: Create additional tests as appropriate for your tap.
+TestTapSmokeTest = get_tap_test_class(TapSmokeTest, config=BASIC_CONFIG)
 
 
 def test_schema_gen_exception():
