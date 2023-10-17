@@ -13,6 +13,7 @@ updates:
       timezone: "UTC"
     reviewers: [meltano/engineering]
     labels: [deps]
+    versioning-strategy: increase-if-necessary
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
