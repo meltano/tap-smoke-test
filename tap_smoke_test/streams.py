@@ -39,9 +39,7 @@ class FromJSONLStream(SmokeTestStream):
         builder = SchemaBuilder()
         for count, entry in enumerate(self.reader.read()):
             if count > self.config["schema_inference_record_count"]:
-                logging.info(
-                    "%s stream max schema_inference_record_count hit" % self.name
-                )
+                logging.info("%s stream max schema_inference_record_count hit" % self.name)
                 break
             record = json.loads(entry)
             builder.add_object(record)
