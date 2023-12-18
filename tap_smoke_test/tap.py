@@ -1,4 +1,5 @@
 """SmokeTest tap class."""
+from __future__ import annotations
 
 from typing import List
 
@@ -18,8 +19,7 @@ class TapSmokeTest(Tap):
             th.IntegerType,
             default=5,
             required=False,
-            description="How many records of the source data "
-            "should be used for schema inference/construction.",
+            description="How many records of the source data " "should be used for schema inference/construction.",
         ),
         th.Property(
             "streams",
@@ -34,18 +34,14 @@ class TapSmokeTest(Tap):
                         "input_filename",
                         th.StringType,
                         required=True,
-                        description="Path to a jsonl file containing"
-                        "records to use for mock data.",
+                        description="Path to a jsonl file containing" "records to use for mock data.",
                     ),
                     th.Property(
                         "client_exception",
                         th.BooleanType,
                         required=False,
                         default=False,
-                        description=(
-                            "Whether we should simulate failing by having the client "
-                            "raise an exception."
-                        ),
+                        description=("Whether we should simulate failing by having the client " "raise an exception."),
                     ),
                     th.Property(
                         "schema_gen_exception",
@@ -60,9 +56,7 @@ class TapSmokeTest(Tap):
                         th.IntegerType,
                         required=False,
                         default=1,
-                        description=(
-                            "The number of times we should playback the input file."
-                        ),
+                        description=("The number of times we should playback the input file."),
                     ),
                 )
             ),
@@ -70,7 +64,7 @@ class TapSmokeTest(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> List[Stream]:
+    def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams.
 
         Returns:

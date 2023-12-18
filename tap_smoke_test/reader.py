@@ -71,7 +71,4 @@ class HTTPReader(InputReader):
         if r.ok:
             yield from r.iter_lines()
         else:
-            raise Exception(
-                f"Fetch of remote payload failed. status: [{r.status_code}], "
-                f"reason: [{r.reason}]"
-            )
+            raise Exception(f"Fetch of remote payload failed. status: [{r.status_code}], " f"reason: [{r.reason}]")

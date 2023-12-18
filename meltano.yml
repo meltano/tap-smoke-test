@@ -5,22 +5,20 @@ plugins:
   extractors:
   - name: tap-smoke-test
     namespace: tap_smoke_test
-    # TODO: To test using Meltano, replace with absolute path
-    #       to the tap-smoke-test.sh script:
-    executable: ./tap-smoke-test.sh
+    pip_url: -e .
     capabilities:
     - state
     - catalog
     - discover
-    config:
-      start_date: '2010-01-01T00:00:00Z'
     settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
-    - name: username
-    - name: password
-      kind: password
-    - name: start_date
-      value: '2010-01-01T00:00:00Z'
+    - name: streams
+      kind: array
+    - name: schema_inference_record_count
+      kind: integer
+    - name: client_exception
+      kind: boolean
+    - name: schema_gen_exception
+      kind: boolean
   loaders:
   - name: target-jsonl
     variant: andyh1203

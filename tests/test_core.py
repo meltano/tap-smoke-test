@@ -1,4 +1,6 @@
 """Tests standard tap features using the built-in SDK tests library."""
+from __future__ import annotations
+
 import re
 from os import path
 from unittest import mock
@@ -37,9 +39,7 @@ def test_schema_gen_exception():
         ]
     }
 
-    with pytest.raises(
-        Exception, match="Smoke test schema call failing with exception"
-    ):
+    with pytest.raises(Exception, match="Smoke test schema call failing with exception"):
         TapSmokeTest(config=config, parse_env_config=False)
 
 
@@ -113,8 +113,6 @@ class TestRemote:
         mock_resp = self._mock_response(content="Not found", status=404)
         mock_get.return_value = mock_resp
 
-        pattern = re.escape(
-            "Fetch of remote payload failed. status: [404], reason: [Not found]"
-        )
+        pattern = re.escape("Fetch of remote payload failed. status: [404], reason: [Not found]")
         with pytest.raises(Exception, match=pattern):
             _ = TapSmokeTest(config=config, parse_env_config=False)

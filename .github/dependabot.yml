@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: daily
       time: "12:00"
-      timezone: "UTC"
+      timezone: "Etc/UTC"
     reviewers: [meltano/engineering]
     labels: [deps]
     versioning-strategy: increase-if-necessary
