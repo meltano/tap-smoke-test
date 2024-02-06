@@ -9,12 +9,12 @@ license = "Apache-2.0"
 [tool.poetry.dependencies]
 python = ">=3.8.1"
 requests = "~=2.31"
-singer-sdk = "~=0.34.0"
+singer-sdk = "~=0.35.0"
 genson = "~=1.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=8.0"
-singer-sdk = { version = "~=0.34.0", extras = ["testing"] }
+singer-sdk = { version = "~=0.35.0", extras = ["testing"] }
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -58,5 +58,5 @@ required-imports = ["from __future__ import annotations"]
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["ANN", "D1"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
