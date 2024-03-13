@@ -1,4 +1,5 @@
 """Tests standard tap features using the built-in SDK tests library."""
+
 from __future__ import annotations
 
 import re
