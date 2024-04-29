@@ -18,10 +18,7 @@ def trim_prefix(string: str, prefix: str) -> str:
     Returns:
         The string with the prefix trimmed.
     """
-    if string.startswith(prefix):
-        return string[len(prefix) :]
-    else:
-        return string[:]
+    return string[len(prefix) :] if string.startswith(prefix) else string[:]
 
 
 class InputReader:
@@ -49,7 +46,7 @@ class LocalReader(InputReader):
         Yields:
             Each line in the input file.
         """
-        logging.debug("reading local file: %s" % self.input_filename)
+        logging.debug("reading local file: %s", self.input_filename)
         with open(trim_prefix(self.input_filename, "file://")) as f:
             yield from f
 
@@ -66,7 +63,7 @@ class HTTPReader(InputReader):
         Raises:
             Exception: If the fetch of the remote file fails.
         """
-        logging.debug("reading remote file: %s" % self.input_filename)
+        logging.debug("reading remote file: %s", self.input_filename)
         r = requests.get(self.input_filename)
         if r.ok:
             yield from r.iter_lines()
