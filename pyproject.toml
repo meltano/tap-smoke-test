@@ -1,9 +1,19 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core>=1",
+]
+
 [tool.poetry]
 name = "tap-smoke-test"
 version = "0.0.1"
 description = "`tap-smoke-test` is a Singer tap for SmokeTest, built with the Meltano SDK for Singer Taps."
-authors = ["Meltano team and contributors <hello@meltano.com>"]
-maintainers = ["Meltano team and contributors <hello@meltano.com>"]
+authors = [
+  "Meltano team and contributors <hello@meltano.com>",
+]
+maintainers = [
+  "Meltano team and contributors <hello@meltano.com>",
+]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
@@ -14,13 +24,9 @@ genson = "~=1.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=8.0"
-singer-sdk = { version = "~=0.37.0", extras = ["testing"] }
-
-[build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [
-  "poetry-core>=1",
-]
+singer-sdk = { version = "~=0.37.0", extras = [
+  "testing",
+] }
 
 [tool.poetry.scripts]
 # CLI declaration
@@ -32,7 +38,7 @@ target-version = "py38"
 
 [tool.ruff.lint]
 ignore = [
-  "ANN101"
+  "ANN101",
 ]
 select = [
   "ANN",
@@ -47,16 +53,23 @@ mypy-init-return = true
 suppress-dummy-args = true
 
 [tool.ruff.lint.flake8-import-conventions]
-banned-from = ["typing"]
+banned-from = [
+  "typing",
+]
 
 [tool.ruff.lint.flake8-import-conventions.extend-aliases]
 typing = "t"
 
 [tool.ruff.lint.isort]
-required-imports = ["from __future__ import annotations"]
+required-imports = [
+  "from __future__ import annotations",
+]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["ANN", "D1"]
+"tests/*" = [
+  "ANN",
+  "D1",
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
