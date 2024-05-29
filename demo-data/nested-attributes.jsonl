@@ -1,5 +1,5 @@
-{"id": 0, "nested_object": {"id": 100, "nested_field": "One hundred"}, "toplevel_field": "Zero"}
-{"id": 1, "nested_object": {"id": 101, "nested_field": "One hundred and one"}, "toplevel_field": "One"}
+{"id": 0}
+{"id": 1, "nested_object": {"id": 101}, "toplevel_field": "One"}
 {"id": 2, "nested_object": {"id": 102, "nested_field": "One hundred and two"}, "toplevel_field": "Two"}
 {"id": 3, "nested_object": {"id": 103, "nested_field": "One hundred and three"}, "toplevel_field": "Three"}
 {"id": 4, "nested_object": {"id": 104, "nested_field": "One hundred and four"}, "toplevel_field": "Four"}
