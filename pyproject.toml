@@ -19,12 +19,12 @@ license = "Apache-2.0"
 [tool.poetry.dependencies]
 python = ">=3.8.1"
 requests = "~=2.31"
-singer-sdk = "~=0.39.0"
+singer-sdk = "~=0.40.0"
 genson = "~=1.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=8.0"
-singer-sdk = { version = "~=0.39.0", extras = [
+singer-sdk = { version = "~=0.40.0", extras = [
   "testing",
 ] }
 
