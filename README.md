@@ -62,6 +62,17 @@ multiple times using the `loop_count` option to produce large amounts of output:
 
 In the example above, the animals-data.json records will be read and emitted as records 3 times.
 
+meltano.yml example
+```yml
+  - name: tap-smoke-test
+    variant: meltano
+    pip_url: git+https://github.com/meltano/tap-smoke-test.git
+    config:
+      streams:
+      - stream_name: "animals"
+        input_filename: "https://gitlab.com/meltano/tap-smoke-test/-/raw/main/demo-data/animals-data.jsonl"
+```
+
 ### Schema inference
 
 This tap uses [genson](https://pypi.org/project/genson/) to attempt to dynamically infer the schema of the JSON input
