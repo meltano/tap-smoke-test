@@ -62,8 +62,8 @@ multiple times using the `loop_count` option to produce large amounts of output:
 
 In the example above, the animals-data.json records will be read and emitted as records 3 times.
 
-meltano.yml example
 ```yml
+# meltano.yml
   - name: tap-smoke-test
     variant: meltano
     pip_url: git+https://github.com/meltano/tap-smoke-test.git
