@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Iterable
+from collections.abc import Iterable
 from urllib.parse import urlparse
 
 from singer_sdk.streams import Stream

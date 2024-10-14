@@ -17,7 +17,7 @@ maintainers = [
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = ">=3.8.1"
+python = ">=3.9"
 requests = "~=2.31"
 singer-sdk = "~=0.41.0"
 genson = "~=1.2"
@@ -33,7 +33,7 @@ singer-sdk = { version = "~=0.41.0", extras = [
 tap-smoke-test = 'tap_smoke_test.tap:TapSmokeTest.cli'
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 
 line-length = 120
 lint.select = [
