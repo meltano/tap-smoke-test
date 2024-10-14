@@ -2,13 +2,16 @@ name: Test tap-smoke-test
 
 on: [push]
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   pytest:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     env:
       PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
 
