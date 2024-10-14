@@ -32,12 +32,12 @@ repos:
     - types-requests
 
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: "2.2.4"
+  rev: "2.3.1"
   hooks:
   - id: pyproject-fmt
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.29.3
+  rev: 0.29.4
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
