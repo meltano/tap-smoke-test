@@ -65,7 +65,7 @@ class SmokeTestStream(Stream):
         i = 0
         while i < self.stream_config["loop_count"]:
             i += 1
-            logging.debug("%s starting loop: %d" % (self.name, i))
+            logging.debug("%s starting loop: %d", self.name, i)
             for entry in self.reader.read():
                 yield json.loads(entry)
 
