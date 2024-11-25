@@ -42,9 +42,6 @@ lint.select = [
   "I",
   "UP",
 ]
-lint.ignore = [
-  "ANN101",
-]
 lint.per-file-ignores."tests/*" = [
   "ANN",
   "D1",
