@@ -9,10 +9,9 @@ from unittest import mock
 import pytest
 from singer_sdk.testing import get_tap_test_class
 
-from tap_smoke_test import demo_data
 from tap_smoke_test.tap import TapSmokeTest
 
-FIXTURE_DIR = importlib.resources.files(demo_data)
+FIXTURE_DIR = importlib.resources.files("demo-data")
 
 BASIC_CONFIG = {
     "streams": [
