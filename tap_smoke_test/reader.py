@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import logging
-from collections.abc import Generator
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 import requests
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 
 def trim_prefix(string: str, prefix: str) -> str:
@@ -47,7 +51,7 @@ class LocalReader(InputReader):
             Each line in the input file.
         """
         logging.debug("reading local file: %s", self.input_filename)
-        with open(trim_prefix(self.input_filename, "file://")) as f:
+        with Path(self.input_filename.removeprefix("file://")).open() as f:
             yield from f
 
 

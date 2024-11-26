@@ -37,9 +37,27 @@ target-version = "py39"
 
 line-length = 120
 lint.select = [
+  "A",
   "ANN",
+  "B",
+  "BLE",
+  "C4",
+  "C9",
   "D",
+  "DTZ",
+  "FA",
+  "FBT",
+  "G",
   "I",
+  "LOG",
+  "N",
+  "PERF",
+  "PTH",
+  "RUF",
+  "SIM",
+  "T10",
+  "TC",
+  "TID",
   "UP",
 ]
 lint.per-file-ignores."tests/*" = [
