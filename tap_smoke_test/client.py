@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import json
 import logging
-from collections.abc import Iterable
+from typing import TYPE_CHECKING
 from urllib.parse import urlparse
 
 from singer_sdk.streams import Stream
 
 from tap_smoke_test.reader import HTTPReader, InputReader, LocalReader
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class SmokeTestStream(Stream):

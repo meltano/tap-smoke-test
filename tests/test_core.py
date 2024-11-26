@@ -2,25 +2,23 @@
 
 from __future__ import annotations
 
+import importlib.resources
 import re
-from os import path
 from unittest import mock
 
 import pytest
 from singer_sdk.testing import get_tap_test_class
 
+from tap_smoke_test import demo_data
 from tap_smoke_test.tap import TapSmokeTest
 
-FIXTURE_DIR = path.join(
-    path.dirname(path.realpath(__file__)),
-    "../demo-data",
-)
+FIXTURE_DIR = importlib.resources.files(demo_data)
 
 BASIC_CONFIG = {
     "streams": [
         {
             "stream_name": "test",
-            "input_filename": path.join(FIXTURE_DIR, "pageviews-data.jsonl"),
+            "input_filename": str(FIXTURE_DIR / "pageviews-data.jsonl"),
         }
     ]
 }
@@ -34,7 +32,7 @@ def test_schema_gen_exception():
         "streams": [
             {
                 "stream_name": "test",
-                "input_filename": path.join(FIXTURE_DIR, "pageviews-data.jsonl"),
+                "input_filename": str(FIXTURE_DIR / "pageviews-data.jsonl"),
                 "schema_gen_exception": True,
             }
         ]
@@ -49,7 +47,7 @@ def test_client_exception():
         "streams": [
             {
                 "stream_name": "test",
-                "input_filename": path.join(FIXTURE_DIR, "pageviews-data.jsonl"),
+                "input_filename": str(FIXTURE_DIR / "pageviews-data.jsonl"),
                 "client_exception": True,
             }
         ]
