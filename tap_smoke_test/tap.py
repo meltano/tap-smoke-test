@@ -33,7 +33,7 @@ class TapSmokeTest(Tap):
                         "input_filename",
                         th.StringType,
                         required=True,
-                        description="Path to a jsonl file containingrecords to use for mock data.",
+                        description="Path to a jsonl file containing records to use for mock data.",
                     ),
                     th.Property(
                         "client_exception",
