@@ -18,7 +18,7 @@ class TapSmokeTest(Tap):
             th.IntegerType,
             default=5,
             required=False,
-            description="How many records of the source data " "should be used for schema inference/construction.",
+            description="How many records of the source data should be used for schema inference/construction.",
         ),
         th.Property(
             "streams",
@@ -33,14 +33,14 @@ class TapSmokeTest(Tap):
                         "input_filename",
                         th.StringType,
                         required=True,
-                        description="Path to a jsonl file containing" "records to use for mock data.",
+                        description="Path to a jsonl file containingrecords to use for mock data.",
                     ),
                     th.Property(
                         "client_exception",
                         th.BooleanType,
                         required=False,
                         default=False,
-                        description=("Whether we should simulate failing by having the client " "raise an exception."),
+                        description=("Whether we should simulate failing by having the client raise an exception."),
                     ),
                     th.Property(
                         "schema_gen_exception",
