@@ -14,6 +14,8 @@ from tap_smoke_test.reader import HTTPReader, InputReader, LocalReader
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
+logger = logging.getLogger(__name__)
+
 
 class SmokeTestStream(Stream):
     """Stream class for SmokeTest streams."""
@@ -68,10 +70,10 @@ class SmokeTestStream(Stream):
         i = 0
         while i < self.stream_config["loop_count"]:
             i += 1
-            logging.debug("%s starting loop: %d", self.name, i)
+            logger.debug("%s starting loop: %d", self.name, i)
             for entry in self.reader.read():
                 yield json.loads(entry)
 
         if self.stream_config.get("client_exception", False):
-            logging.warning("raising smoke test client exception")
+            logger.warning("raising smoke test client exception")
             raise Exception("Smoke test client failing with exception")
