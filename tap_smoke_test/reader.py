@@ -11,6 +11,8 @@ import requests
 if TYPE_CHECKING:
     from collections.abc import Generator
 
+logger = logging.getLogger(__name__)
+
 
 def trim_prefix(string: str, prefix: str) -> str:
     """Trim a given prefix from a string if present.
@@ -50,7 +52,7 @@ class LocalReader(InputReader):
         Yields:
             Each line in the input file.
         """
-        logging.debug("reading local file: %s", self.input_filename)
+        logger.debug("reading local file: %s", self.input_filename)
         with Path(self.input_filename.removeprefix("file://")).open() as f:
             yield from f
 
@@ -67,7 +69,7 @@ class HTTPReader(InputReader):
         Raises:
             Exception: If the fetch of the remote file fails.
         """
-        logging.debug("reading remote file: %s", self.input_filename)
+        logger.debug("reading remote file: %s", self.input_filename)
         r = requests.get(self.input_filename)
         if r.ok:
             yield from r.iter_lines()
