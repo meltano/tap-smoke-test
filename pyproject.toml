@@ -18,15 +18,18 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.9"
-requests = "~=2.31"
-singer-sdk = "~=0.45.1"
 genson = "~=1.2"
+requests = "~=2.31"
+
+[tool.poetry.dependencies."singer-sdk"]
+version = "~=0.45.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=8.0"
-singer-sdk = { version = "~=0.45.1", extras = [
-  "testing",
-] }
+
+[tool.poetry.group.dev.dependencies."singer-sdk"]
+version = "~=0.45.1"
+extras = [ "testing" ]
 
 [tool.poetry.scripts]
 # CLI declaration
