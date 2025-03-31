@@ -29,7 +29,7 @@ pytest = "~=8.0"
 
 [tool.poetry.group.dev.dependencies."singer-sdk"]
 version = "~=0.45.1"
-extras = ["testing"]
+extras = [ "testing" ]
 
 [tool.poetry.scripts]
 # CLI declaration
