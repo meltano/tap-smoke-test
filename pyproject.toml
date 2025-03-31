@@ -85,3 +85,6 @@ ignore_missing_imports = true
 module = [
   "genson.*",
 ]
+
+[tool.uv.sources]
+singer-sdk = { git = "https://github.com/meltano/sdk.git", rev = "main" }
