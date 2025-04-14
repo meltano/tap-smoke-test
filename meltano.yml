@@ -6,6 +6,7 @@ plugins:
   - name: tap-smoke-test
     namespace: tap_smoke_test
     pip_url: -e .
+    repo: https://github.com/meltano/tap-smoke-test
     capabilities:
     - state
     - catalog
