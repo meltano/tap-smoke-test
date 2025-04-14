@@ -40,4 +40,5 @@ repos:
   rev: 0.33.0
   hooks:
   - id: check-dependabot
+  - id: check-meltano
   - id: check-github-workflows
