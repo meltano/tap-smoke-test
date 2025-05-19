@@ -22,13 +22,13 @@ genson = "~=1.2"
 requests = "~=2.31"
 
 [tool.poetry.dependencies."singer-sdk"]
-version = "~=0.45.1"
+version = "~=0.46.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "~=8.0"
 
 [tool.poetry.group.dev.dependencies."singer-sdk"]
-version = "~=0.45.1"
+version = "~=0.46.0"
 extras = [ "testing" ]
 
 [tool.poetry.scripts]
