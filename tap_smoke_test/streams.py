@@ -4,10 +4,16 @@ from __future__ import annotations
 
 import json
 import logging
+import sys
 
 from genson import SchemaBuilder
 
 from tap_smoke_test.client import SmokeTestStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +24,7 @@ class FromJSONLStream(SmokeTestStream):
     _inferred_schema = None
 
     @property
+    @override
     def schema(self) -> dict:
         """Dynamically infer the json schema from the source data.
 

@@ -1,6 +1,9 @@
 version: 1
 send_anonymous_usage_stats: true
 project_id: tap-smoke-test
+default_environment: dev
+environments:
+- name: dev
 plugins:
   extractors:
   - name: tap-smoke-test
@@ -20,6 +23,10 @@ plugins:
       kind: boolean
     - name: schema_gen_exception
       kind: boolean
+    config:
+      streams:
+      - stream_name: "animals"
+        input_filename: $MELTANO_PROJECT_ROOT/demo-data/animals-data.jsonl
   loaders:
   - name: target-jsonl
     variant: andyh1203
