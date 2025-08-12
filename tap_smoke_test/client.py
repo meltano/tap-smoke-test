@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import sys
 from typing import TYPE_CHECKING
 from urllib.parse import urlparse
 
@@ -11,8 +12,15 @@ from singer_sdk.streams import Stream
 
 from tap_smoke_test.reader import HTTPReader, InputReader, LocalReader
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
 if TYPE_CHECKING:
     from collections.abc import Iterable
+
+    from singer_sdk.helpers.types import Context, Record
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +54,8 @@ class SmokeTestStream(Stream):
             Exception: If the input_filename's url scheme is not supported.
         """
         path = urlparse(self.stream_config["input_filename"])
+
+        # TODO: Use match statement when we drop Python 3.9 support
         if path.scheme in ["file", ""]:
             return LocalReader(self.stream_config["input_filename"])
         elif path.scheme in ["http", "https"]:
@@ -53,7 +63,8 @@ class SmokeTestStream(Stream):
         else:
             raise Exception(f"Unsupported scheme [{path.scheme}] for input_filename.")
 
-    def get_records(self, context: dict | None) -> Iterable[dict]:
+    @override
+    def get_records(self, context: Context | None) -> Iterable[Record]:
         """Return a generator of row-type dictionary objects.
 
         Args:

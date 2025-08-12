@@ -2,10 +2,21 @@
 
 from __future__ import annotations
 
+import sys
+from typing import TYPE_CHECKING
+
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_smoke_test.streams import FromJSONLStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 class TapSmokeTest(Tap):
@@ -63,7 +74,8 @@ class TapSmokeTest(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> list[Stream]:
+    @override
+    def discover_streams(self) -> Sequence[Stream]:
         """Return a list of discovered streams.
 
         Returns:

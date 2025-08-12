@@ -7,7 +7,7 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 ## Installation
 
 ```bash
-pipx install tap-smoke-test
+uv tool install git+https://github.com/meltano/tap-smoke-test.git
 ```
 
 ## Configuration
@@ -146,8 +146,8 @@ tap-smoke-test --config demo-data/multiple-streams-config.json
 ### Initialize your Development Environment
 
 ```bash
-pipx install poetry
-poetry install
+curl -LsSf https://astral.sh/uv/install.sh | sh  # or see https://docs.astral.sh/uv/getting-started/installation/
+uv sync
 ```
 
 ### Create and Run Tests
@@ -156,13 +156,13 @@ Create tests within the `tap_smoke_test/tests` subfolder and
   then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
-You can also test the `tap-smoke-test` CLI interface directly using `poetry run`:
+You can also test the `tap-smoke-test` CLI interface directly using `uv run`:
 
 ```bash
-poetry run tap-smoke-test --help
+uv run tap-smoke-test --help
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)
@@ -177,7 +177,7 @@ Next, install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano
-pipx install meltano
+uv tool install meltano
 # Initialize meltano within this directory
 cd tap-smoke-test
 meltano install
@@ -188,8 +188,8 @@ Now you can test and orchestrate using Meltano:
 ```bash
 # Test invocation:
 meltano invoke tap-smoke-test --version
-# OR run a test `elt` pipeline:
-meltano elt tap-smoke-test target-jsonl
+# OR run a test EL pipeline:
+meltano run tap-smoke-test target-jsonl
 ```
 
 ### SDK Dev Guide

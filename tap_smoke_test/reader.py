@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
+import abc
 import logging
+import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 import requests
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -27,7 +34,7 @@ def trim_prefix(string: str, prefix: str) -> str:
     return string[len(prefix) :] if string.startswith(prefix) else string[:]
 
 
-class InputReader:
+class InputReader(abc.ABC):
     """Generic class with a read() call yielding lines."""
 
     def __init__(self, input_filename: str) -> None:
@@ -38,14 +45,15 @@ class InputReader:
         """
         self.input_filename = input_filename
 
-    def read(self) -> Generator[str, None, None]:  # type: ignore
+    @abc.abstractmethod
+    def read(self) -> Generator[str, None, None]:
         """Read the input file and yield each line."""
-        ...
 
 
 class LocalReader(InputReader):
     """An InputReader supporting reading files from local paths."""
 
+    @override
     def read(self) -> Generator[str, None, None]:
         """Read the input file and yield each line.
 
@@ -60,6 +68,7 @@ class LocalReader(InputReader):
 class HTTPReader(InputReader):
     """An InputReader supporting reading files from remote HTTP(s) urls."""
 
+    @override
     def read(self) -> Generator[str, None, None]:
         """Read the input file and yield each line.
 
