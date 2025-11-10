@@ -30,7 +30,7 @@ scripts.tap-smoke-test = "tap_smoke_test.tap:TapSmokeTest.cli"
 
 [dependency-groups]
 dev = [
-  "pytest~=8.0",
+  "pytest~=9.0",
   "singer-sdk[testing]",
   "types-requests>=2.32.4.20250809",
 ]
