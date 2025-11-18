@@ -22,7 +22,7 @@ classifiers = [
 dependencies = [
   "genson~=1.2",
   "requests~=2.31",
-  "singer-sdk~=0.52.0",
+  "singer-sdk~=0.53.0",
   "typing-extensions>=4.13.2; python_full_version<'3.12'",
 ]
 
