@@ -30,7 +30,7 @@ scripts.tap-smoke-test = "tap_smoke_test.tap:TapSmokeTest.cli"
 dev = [
   "pytest~=9.0",
   "singer-sdk[testing]",
-  "types-requests>=2.32.4.20250809",
+  "types-requests>=2.33.0.20260503",
 ]
 
 [tool.ruff]
