@@ -21,7 +21,7 @@ classifiers = [
 dependencies = [
   "genson~=1.2",
   "requests~=2.34",
-  "singer-sdk~=0.54.3",
+  "singer-sdk~=0.54.4",
   "typing-extensions>=4.13.2; python_full_version<'3.12'",
 ]
 scripts.tap-smoke-test = "tap_smoke_test.tap:TapSmokeTest.cli"
