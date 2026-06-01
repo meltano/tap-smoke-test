@@ -78,6 +78,6 @@ lint.pydocstyle.convention = "google"
 max_supported_python = "3.14"
 
 [tool.mypy]
-overrides = [ { ignore_missing_imports = true, module = [
+overrides = [ { module = [
   "genson.*",
-] } ]
+], ignore_missing_imports = true } ]
