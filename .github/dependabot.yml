@@ -26,7 +26,7 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: quarterly
     labels: [deps]
     commit-message:
       prefix: "ci: "
