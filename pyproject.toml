@@ -19,7 +19,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-  "genson~=1.2",
+  "genson~=1.4",
   "requests~=2.34",
   "singer-sdk~=0.54.5",
   "typing-extensions>=4.13.2; python_full_version<'3.12'",
