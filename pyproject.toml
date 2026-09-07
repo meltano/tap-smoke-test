@@ -79,5 +79,5 @@ max_supported_python = "3.14"
 
 [tool.mypy]
 overrides = [ { module = [
-  "genson.*",
-], ignore_missing_imports = true } ]
+    "genson.*",
+  ], ignore_missing_imports = true } ]
