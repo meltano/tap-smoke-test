@@ -42,7 +42,7 @@ class SmokeTestStream(Stream):
         return {}
 
     @property
-    def reader(self) -> InputReader:
+    def reader(self) -> InputReader[str | bytes]:
         """Obtain an InputReader on input_filename's url scheme.
 
         Can be a local or remote file, or a web url.

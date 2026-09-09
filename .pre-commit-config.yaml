@@ -24,15 +24,8 @@ repos:
     args: [--fix, --exit-non-zero-on-fix, --show-fixes]
   - id: ruff-format
 
-- repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v2.3.1
-  hooks:
-  - id: mypy
-    additional_dependencies:
-    - types-requests
-
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: "v2.29.3"
+  rev: v2.29.4
   hooks:
   - id: pyproject-fmt
 
