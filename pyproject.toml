@@ -5,6 +5,7 @@ requires = [ "hatch-vcs", "hatchling" ]
 [project]
 name = "tap-smoke-test"
 description = "Singer tap for SmokeTest, built with the Meltano SDK for Singer Taps"
+readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"
 classifiers = [
