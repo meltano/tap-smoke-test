@@ -1,10 +1,9 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = [ "hatchling", "hatch-vcs" ]
+requires = [ "hatch-vcs", "hatchling" ]
 
 [project]
 name = "tap-smoke-test"
-dynamic = [ "version" ]
 description = "Singer tap for SmokeTest, built with the Meltano SDK for Singer Taps"
 license = "Apache-2.0"
 requires-python = ">=3.10"
@@ -17,6 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: 3.15",
 ]
+dynamic = [ "version" ]
 dependencies = [
   "genson~=1.4",
   "requests~=2.34",
@@ -47,8 +47,8 @@ typing = [
 ]
 
 [tool.hatch.version]
-fallback-version = "0.0.0.dev0"
 source = "vcs"
+fallback-version = "0.0.0.dev0"
 
 [tool.ruff]
 line-length = 120
