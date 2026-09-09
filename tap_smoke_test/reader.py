@@ -6,7 +6,7 @@ import abc
 import logging
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Generic, TypeVar
 
 import requests
 
@@ -19,6 +19,8 @@ if TYPE_CHECKING:
     from collections.abc import Generator
 
 logger = logging.getLogger(__name__)
+
+_T = TypeVar("_T", covariant=True)
 
 
 def trim_prefix(string: str, prefix: str) -> str:
@@ -34,7 +36,7 @@ def trim_prefix(string: str, prefix: str) -> str:
     return string[len(prefix) :] if string.startswith(prefix) else string[:]
 
 
-class InputReader(abc.ABC):
+class InputReader(abc.ABC, Generic[_T]):
     """Generic class with a read() call yielding lines."""
 
     def __init__(self, input_filename: str) -> None:
@@ -46,11 +48,11 @@ class InputReader(abc.ABC):
         self.input_filename = input_filename
 
     @abc.abstractmethod
-    def read(self) -> Generator[str, None, None]:
+    def read(self) -> Generator[_T, None, None]:
         """Read the input file and yield each line."""
 
 
-class LocalReader(InputReader):
+class LocalReader(InputReader[str]):
     """An InputReader supporting reading files from local paths."""
 
     @override
@@ -65,11 +67,11 @@ class LocalReader(InputReader):
             yield from f
 
 
-class HTTPReader(InputReader):
+class HTTPReader(InputReader[bytes]):
     """An InputReader supporting reading files from remote HTTP(s) urls."""
 
     @override
-    def read(self) -> Generator[str, None, None]:
+    def read(self) -> Generator[bytes, None, None]:
         """Read the input file and yield each line.
 
         Yields:
