@@ -30,7 +30,7 @@ jobs:
         id: baipp
 
   typing:
-    name: Test
+    name: Typing
     runs-on: ubuntu-latest
     needs: build-package
 
