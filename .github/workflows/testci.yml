@@ -14,11 +14,37 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-permissions: {}
+permissions:
+  contents: read
 
 jobs:
+  files-changed:
+    name: Detect file changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      runtime: ${{ steps.changes.outputs.runtime }}
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+      id: changes
+      with:
+        filters: |
+          runtime:
+            - tap_smoke_test/**
+            - tests/**
+            - pyproject.toml
+            - uv.lock
+            - .github/workflows/testci.yml
+
   build-package:
     name: Build & verify package
+    needs: files-changed
+    if: ${{ needs.files-changed.outputs.runtime == 'true' }}
     runs-on: ubuntu-latest
     outputs:
       supported-python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
@@ -41,7 +67,7 @@ jobs:
         persist-credentials: false
 
     - name: Install uv
-      uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
 
     - name: Type Checks
       run: |
@@ -63,10 +89,27 @@ jobs:
         persist-credentials: false
 
     - name: Install uv
-      uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
       with:
         python-version: '${{ matrix.python-version }}'
 
     - name: Test with pytest
       run: |
         uv run --group testing pytest --capture=no
+
+  ci:
+    name: CI required checks
+    if: always()
+    needs:
+    - files-changed
+    - build-package
+    - typing
+    - pytest
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+    - name: Decide whether the needed jobs succeeded or failed
+      uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # v1.3.0
+      with:
+        jobs: ${{ toJSON(needs) }}
+        allowed-skips: build-package,typing,pytest
